@@ -10,15 +10,12 @@ const transactionRoutes=require("./routes/Transaction")
 const accessPermissionRoutes=require('./routes/AccessPermission')
 const allRequest=require('./routes/AllRequest')
 const rejectPermissionRoutes=require('./routes/RejectPermission')
-
-// database connection
+const forgetPassword= require("./routes/ForgetPassword")
 connection();
-
-// middlewares
 app.use(express.json());
 app.use(cors());
 
-// routes
+
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api",detailRoutes);
@@ -28,5 +25,7 @@ app.use("/api",rejectPermissionRoutes)
 
 app.use("/api",transactionRoutes)
 app.use("/api",allRequest);
+app.use("/api",forgetPassword);
+
 const port =  8080;
 app.listen(port, console.log(`Listening on port ${port}...`));
