@@ -3,13 +3,11 @@ const router = express.Router();
 const { User } = require('../models/user'); 
 const Joi = require("joi");
 
-router.put('/transaction/:email/:index/:id/:cname/:refer', async (req, res) => {
+router.put('/refer/:email/:id', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.params.email });
         if (user) {
-            user.transaction[req.params.index] =req.params.id;
-            user.coursename[req.params.index] =req.params.cname;
-            user.referal[req.params.index]=req.params.refer;
+            user.referId=req.params.id;
             await user.save();
             return res.json(user); 
         } else {

@@ -3,17 +3,15 @@ const router = express.Router();
 const { User } = require('../models/user'); 
 const Joi = require("joi");
 
-router.put('/transaction/:email/:index/:id/:cname/:refer', async (req, res) => {
+router.put('/refer/:email', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.params.email });
         if (user) {
-            user.transaction[req.params.index] =req.params.id;
-            user.coursename[req.params.index] =req.params.cname;
-            user.referal[req.params.index]=req.params.refer;
+            user.referred++;
             await user.save();
             return res.json(user); 
         } else {
-            return res.status(404).send('User not found'); 
+            return res.status(404).send('Wrong referral id.'); 
         }
     } catch (err) {
         return res.status(500).send('Server error'); 

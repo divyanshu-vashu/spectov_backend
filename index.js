@@ -11,6 +11,9 @@ const accessPermissionRoutes=require('./routes/AccessPermission')
 const allRequest=require('./routes/AllRequest')
 const rejectPermissionRoutes=require('./routes/RejectPermission')
 const forgetPassword= require("./routes/ForgetPassword")
+const referId=require("./routes/referId")
+const referCount=require("./routes/countRefer")
+
 connection();
 app.use(express.json());
 app.use(cors());
@@ -26,6 +29,8 @@ app.use("/api",rejectPermissionRoutes)
 app.use("/api",transactionRoutes)
 app.use("/api",allRequest);
 app.use("/api",forgetPassword);
+app.use("/api",referId);
+app.use("/api",referCount);
 
 const port =  8080;
 app.listen(port, console.log(`Listening on port ${port}...`));

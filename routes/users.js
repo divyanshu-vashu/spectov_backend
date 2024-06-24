@@ -18,11 +18,12 @@ router.post("/", async (req, res) => {
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 		console.log(hashPassword)
 		await new User({ ...req.body, password: hashPassword }).save();
+
 		res.status(201).send({ message: "User created successfully" });
 	} catch (error) {
 		console.log(error)
 		res.status(500).send({ message: "Internal Server Error" });
 	}
-});
+}); 
 
 module.exports = router;
